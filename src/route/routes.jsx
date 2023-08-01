@@ -15,18 +15,26 @@ const routes = createBrowserRouter([
         index: true,
         element: <Home></Home>,
       },
-      //   {
-      //     path: "/products",
-      //     element: <Products />,
-      //   },
-      //   {
-      //     path: "/product-details/:id",
-      //     element: <ProductDetails />,
-      //   },
-      //   {
-      //     path: "/checkout",
-      //     element: <Checkout />,
-      //   },
+      {
+        path: "/create-course",
+        element: <Products />,
+      },
+      {
+        path: "/material",
+        element: <ProductDetails />,
+      },
+      {
+        path: "/exam",
+        element: <Checkout />,
+      },
+      {
+        path: "/assignment",
+        element: <Checkout />,
+      },
+      {
+        path: "/grade",
+        element: <Checkout />,
+      },
     ],
   },
   {
