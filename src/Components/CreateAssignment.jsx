@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GradeModifier = () => {
+const CreateAssignment = () => {
     const handleform = event => {
         event.preventDefault();
         const form = event.target;
@@ -19,19 +19,13 @@ const GradeModifier = () => {
                     <form onSubmit={handleform}>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Student ID</span>
+                                <span className="label-text">Assignment Name</span>
                             </label>
-                            <input type="text" name='Student id' placeholder="Student id" className="input input-bordered" required />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Student Grade</span>
-                            </label>
-                            <input type="text" name='Student Grade' placeholder="Student Grade" className="input input-bordered" required />
+                            <input type="text" name='Course Name' placeholder="Course id" className="input input-bordered" required />
                         </div>
 
                         <div className="form-control mt-6">
-                            <button type='submit' className="btn btn-primary">Add</button>
+                            <button type='submit' className="btn btn-primary">Create</button>
                         </div>
                     </form>
 
@@ -68,4 +62,5 @@ const GradeModifier = () => {
     );
 };
 
-export default GradeModifier;
+export default CreateAssignment;
+

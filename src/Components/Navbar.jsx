@@ -25,16 +25,27 @@ const Navbar = () => {
                     <button className="btn btn-ghost normal-case text-xl"><Link to='/'>Virtual Classroom</Link></button>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    {/* <ul className="menu menu-horizontal px-1">
                         <li> <Link to='/create-course'>Create Course</Link> </li>
                         <li>
-                            <a>Materials and Contents</a>
+                            <Link to='/material'>Materials and Contents</Link >
 
                         </li>
-                        <li><a>Exams</a></li>
-                        <li><a>Assignments</a></li>
+                        <li><Link to='/create-exam'>Exams</Link></li>
+                        <li><Link to='/create-assignment'>Assignments</Link ></li>
 
-                        <li><a>Grades</a></li>
+                        <li><Link to='/grade'>Grades</Link ></li>
+                    </ul> */}
+                    <ul className="menu menu-horizontal px-1">
+                        <li> <Link to='/add-course'>Add Course</Link> </li>
+                        <li>
+                            <Link to='/my-material'>Course Materials</Link >
+
+                        </li>
+                        <li><Link to='/my-exam'>Exams</Link></li>
+                        <li><Link to='/my-assignment'>Assignments</Link ></li>
+
+                        <li><Link to='/my-grade'>Progress Tracking</Link ></li>
                     </ul>
                 </div>
                 <div className="navbar-end">

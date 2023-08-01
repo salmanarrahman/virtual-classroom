@@ -19,7 +19,7 @@ const Home = () => {
                             <p>Book one for easy, secure communication</p>
                             <p>Precise white paperback pages for clear visuals</p>
                         </div>
-                        <button className="btn btn-ghost mt-5">Learn More</button>
+                        <p className="btn btn-bg-200 mt-5">Learn More</p>
                     </div>
                     <div className="relative -right-14">
                         <img src={image} alt="" />
