@@ -1,33 +1,59 @@
 import React from 'react';
+import { useCreateGradeMutation } from '../redux/api/apiSlice';
+import { toast } from 'react-hot-toast';
 
 const GradeModifier = () => {
+    const [createGrade, { isLoading, isError }] = useCreateGradeMutation()
     const handleform = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
-        const password = form.password.value;
-        console.log(email, password)
+        const grade = form.grade.value;
+        const allData = {
+            data: {
+                email: email,
+                grade: grade
+            }
+        }
 
+        createGrade(allData)
+
+        form.reset()
+        if (!isError) {
+            toast.success('Student graded Successfully', {
+                duration: 2000, // Display duration in milliseconds (default: 5000)
+                position: 'top-center', // Toast position (default: 'top-right')
+            });
+
+        }
+
+
+        if (isError) {
+            toast.error('Error', {
+                duration: 2000, // Display duration in milliseconds (default: 5000)
+                position: 'top-center', // Toast position (default: 'top-right')
+            });
+        }
     }
     return (
         <div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            <div className="flex justify-center items-center">
                 <div>
 
 
                     <form onSubmit={handleform}>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Student ID</span>
+                                <span className="label-text">Student Email</span>
                             </label>
-                            <input type="text" name='Student id' placeholder="Student id" className="input input-bordered" required />
+                            <input type="text" name='email' placeholder="Student Email" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Student Grade</span>
                             </label>
-                            <input type="text" name='Student Grade' placeholder="Student Grade" className="input input-bordered" required />
+                            <input type="text" name='grade' placeholder="Student Grade" className="input input-bordered" required />
                         </div>
 
                         <div className="form-control mt-6">
@@ -37,31 +63,7 @@ const GradeModifier = () => {
 
                 </div>
 
-                <div>
-                    <div className="overflow-x-auto">
-                        <table className="table">
-                            {/* head */}
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Course id</th>
-                                    <th>Courses</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* row 1 */}
-                                <tr>
-                                    <th>1</th>
-                                    <td>Cy Ganderton</td>
-                                    <td>Quality Control Specialist</td>
-                                    <td>Blue</td>
-                                </tr>
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
 
         </div>

@@ -15,6 +15,7 @@ import MyMaterial from "../Components/MyMaterial";
 import MyExam from "../Components/MyExam";
 import MyAssignment from "../Components/MyAssignment";
 import MyGrade from "../Components/MyGrade";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = createBrowserRouter([
   {
@@ -27,43 +28,43 @@ const routes = createBrowserRouter([
       },
       {
         path: "/create-course",
-        element: <CreateCourse></CreateCourse>
+        element: <PrivateRoute> <CreateCourse></CreateCourse></PrivateRoute>
       },
       {
         path: "/material",
-        element: <CourseMaterial></CourseMaterial>
+        element: <PrivateRoute><CourseMaterial></CourseMaterial></PrivateRoute>
       },
       {
         path: "/create-exam",
-        element: <Exam></Exam>
+        element: <PrivateRoute><Exam></Exam></PrivateRoute>
       },
       {
         path: "/create-assignment",
-        element: <CreateAssignment></CreateAssignment>
+        element: <PrivateRoute> <CreateAssignment></CreateAssignment></PrivateRoute>
       },
       {
         path: "/grade",
-        element: <GradeModifier />,
+        element: <PrivateRoute><GradeModifier /></PrivateRoute>
       },
       {
         path: "/add-course",
-        element: <AddCourse></AddCourse>
+        element: <PrivateRoute><AddCourse></AddCourse></PrivateRoute>
       },
       {
         path: "/my-material",
-        element: <MyMaterial></MyMaterial>
+        element: <PrivateRoute><MyMaterial></MyMaterial></PrivateRoute>
       },
       {
         path: "/my-exam",
-        element: <MyExam></MyExam>
+        element: <PrivateRoute><MyExam></MyExam></PrivateRoute>
       },
       {
         path: "/my-assignment",
-        element: <MyAssignment></MyAssignment>
+        element: <PrivateRoute><MyAssignment></MyAssignment></PrivateRoute>
       },
       {
         path: "/my-grade",
-        element: <MyGrade></MyGrade>
+        element: <PrivateRoute><MyGrade></MyGrade></PrivateRoute>
       },
     ],
   },

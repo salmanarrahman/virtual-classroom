@@ -1,54 +1,96 @@
 import React from 'react';
+import { useCreateExamMutation } from '../redux/api/apiSlice';
+import { Toaster, toast } from 'react-hot-toast';
 
 const Exam = () => {
+
+    const [createExam, { isLoading, isError, error }] = useCreateExamMutation()
+
     const handleform = event => {
         event.preventDefault();
         const form = event.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email, password)
 
+        const name = form.courseName.value;
+        const description = form.description.value;
+        const e1 = form.e1.value;
+        const e2 = form.e2.value;
+        const e3 = form.e3.value;
+
+
+        const jsonData = {
+            data: {
+                courseID: name,
+                description: description,
+                question1: e1,
+                question2: e2,
+                question3: e3
+
+            }
+        }
+        createExam(jsonData)
+        if (isLoading) {
+            toast.loading('Processing Please Wait', {
+                duration: 2000, // Display duration in milliseconds (default: 5000)
+                position: 'top-center', // Toast position (default: 'top-right')
+            });
+        }
+        if (!isError) {
+            toast.success('Course Created Successfully', {
+                duration: 2000, // Display duration in milliseconds (default: 5000)
+                position: 'top-center', // Toast position (default: 'top-right')
+            });
+
+        }
+        form.reset()
     }
+
+    if (isError) {
+        toast.error('Error', {
+            duration: 2000, // Display duration in milliseconds (default: 5000)
+            position: 'top-center', // Toast position (default: 'top-right')
+        });
+    }
+
     return (
         <div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            <div className="flex justify-center items-center">
                 <div>
-
+                    <Toaster />
 
                     <form onSubmit={handleform}>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Course Name</span>
+                                <span className="label-text">Course ID</span>
                             </label>
-                            <input type="text" name='Course Name' placeholder="Course Name" className="input input-bordered" required />
+                            <input type="number" name='courseName' placeholder="Course ID (Number Only)" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Exam Description</span>
                             </label>
-                            <input type="text" name='course' placeholder="Description" className="input input-bordered" required />
+                            <input type="text" name='description' placeholder="Description" className="input input-bordered" required />
 
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Exam Question 1</span>
                             </label>
-                            <input type="text" name='course' placeholder="Question" className="input input-bordered" required />
+                            <input type="text" name='e1' placeholder="Question" className="input input-bordered" required />
 
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Exam Question 2</span>
                             </label>
-                            <input type="text" name='course' placeholder="Question" className="input input-bordered" required />
+                            <input type="text" name='e2' placeholder="Question" className="input input-bordered" required />
 
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Exam Question 3</span>
                             </label>
-                            <input type="text" name='course' placeholder="Question" className="input input-bordered" required />
+                            <input type="text" name='e3' placeholder="Question" className="input input-bordered" required />
 
                         </div>
 
@@ -59,31 +101,7 @@ const Exam = () => {
 
                 </div>
 
-                <div>
-                    <div className="overflow-x-auto">
-                        <table className="table">
-                            {/* head */}
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Course id</th>
-                                    <th>Courses</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* row 1 */}
-                                <tr>
-                                    <th>1</th>
-                                    <td>Cy Ganderton</td>
-                                    <td>Quality Control Specialist</td>
-                                    <td>Blue</td>
-                                </tr>
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
 
         </div>

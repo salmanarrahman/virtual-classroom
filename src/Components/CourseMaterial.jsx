@@ -1,27 +1,58 @@
 import React from 'react';
+import { useCreateMaterialMutation } from '../redux/api/apiSlice';
+import { toast } from 'react-hot-toast';
 
 const CourseMaterial = () => {
+
+    const [createMaterial, { isLoading, isError }] = useCreateMaterialMutation()
+
     const handleform = event => {
         event.preventDefault();
         const form = event.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email, password)
+        const courseID = form.courseID.value;
+        const materials = form.course.value;
+
+        const material = {
+            data: {
+                courseID: courseID,
+                materials: materials
+            }
+        }
+        createMaterial(material)
+        form.reset()
+        if (!isError) {
+            toast.success('Course Created Successfully', {
+                duration: 2000, // Display duration in milliseconds (default: 5000)
+                position: 'top-center', // Toast position (default: 'top-right')
+            });
+
+        }
+
 
     }
+
+
+
+    if (isError) {
+        toast.error('Error', {
+            duration: 2000, // Display duration in milliseconds (default: 5000)
+            position: 'top-center', // Toast position (default: 'top-right')
+        });
+    }
+
     return (
         <div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-                <div>
+            <div className="">
+                <div className='flex justify-center items-center '>
 
 
                     <form onSubmit={handleform}>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Course Name</span>
+                                <span className="label-text">Course ID</span>
                             </label>
-                            <input type="text" name='Course Name' placeholder="Course Name" className="input input-bordered" required />
+                            <input type="number" name='courseID' placeholder="Course ID" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -38,31 +69,6 @@ const CourseMaterial = () => {
 
                 </div>
 
-                <div>
-                    <div className="overflow-x-auto">
-                        <table className="table">
-                            {/* head */}
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Course id</th>
-                                    <th>Courses</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* row 1 */}
-                                <tr>
-                                    <th>1</th>
-                                    <td>Cy Ganderton</td>
-                                    <td>Quality Control Specialist</td>
-                                    <td>Blue</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
 
         </div>

@@ -1,7 +1,30 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setUser } from '../redux/user/userSlice';
+import { signOut } from 'firebase/auth';
+import auth from "../lib/Firebase";
+
+
 
 const Navbar = () => {
+    const { user, isLoading } = useSelector(state => state.user)
+    const dispatch = useDispatch();
+
+    if (isLoading) {
+        return <p>Loading</p>
+    }
+
+
+    const handleLogout = () => {
+        console.log('Logout');
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            dispatch(setUser(null));
+        });
+    };
+
+
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -51,39 +74,61 @@ const Navbar = () => {
                     </button>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
-                        <li>
 
-                            <Link to="/create-course">Create Course</Link>
-                        </li>
-                        <li>
-                            <Link to="/material">Materials and Contents</Link>
-                        </li>
-                        <li>
-                            <Link to="/create-exam">Exams</Link>
-                        </li>
-                        <li>
-                            <Link to="/create-assignment">Assignments</Link>
-                        </li>
+                    {
 
-                        <li>
-                            <Link to="/grade">Grades</Link>
-                        </li>
-                    </ul>
-                    {/* <ul className="menu menu-horizontal px-1">
-                        <li> <Link to='/add-course'>Add Course</Link> </li>
-                        <li>
-                            <Link to='/my-material'>Course Materials</Link >
+                        user.email === "admin@vc.com" ?
+                            <>
 
-                        </li>
-                        <li><Link to='/my-exam'>Exams</Link></li>
-                        <li><Link to='/my-assignment'>Assignments</Link ></li>
+                                <ul className="menu menu-horizontal px-1">
+                                    <li>
 
-                        <li><Link to='/my-grade'>Progress Tracking</Link ></li>
-                    </ul> */}
+                                        <Link to="/create-course">Create Course</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/material">Materials and Contents</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/create-exam">Exams</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/create-assignment">Assignments</Link>
+                                    </li>
+
+                                    <li>
+                                        <Link to="/grade">Grades</Link>
+                                    </li>
+                                </ul>
+
+                            </> :
+                            <>
+
+                                <ul className="menu menu-horizontal px-1">
+                                    <li> <Link to='/add-course'>Add Course</Link> </li>
+                                    <li>
+                                        <Link to='/my-material'>Course Materials</Link >
+
+                                    </li>
+                                    <li><Link to='/my-exam'>Exams</Link></li>
+                                    <li><Link to='/my-assignment'>Assignments</Link ></li>
+
+                                    <li><Link to='/my-grade'>Progress Tracking</Link ></li>
+                                </ul>
+
+                            </>
+
+                    }
+
+
+
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Signout</a>
+                    {
+                        user.email ?
+                            <a className="btn" onClick={handleLogout}>Signout</a> :
+                            <a className="btn"><Link to="login">Sign in</Link></a>
+
+                    }
                 </div>
             </div>
         </div>

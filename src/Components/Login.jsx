@@ -1,7 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+/* eslint-disable no-unreachable */
+/* eslint-disable react/no-unknown-property */
+import React, { useEffect } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from '../redux/user/userSlice';
+
 
 const Login = () => {
+
+
+
+    const dispatch = useDispatch();
+    const { user, isLoading, isError } = useSelector((state) => state.user);
+    const navigate = useNavigate();
+
 
 
     const handleSignin = event => {
@@ -9,9 +22,31 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        try {
+            dispatch(loginUser({ email: email, password: password }));
+
+        } catch (error) {
+
+            toast.error("Error occured.Please check your credentials")
+
+        }
+
 
     }
+
+    useEffect(() => {
+        if (user.email && !isLoading) {
+            navigate('/');
+        }
+    }, [user.email, isLoading]);
+
+
+    if (isLoading) {
+        return <progress className="progress w-full"></progress>
+
+    }
+
+
 
     return (
         <div>
@@ -35,7 +70,7 @@ const Login = () => {
                                     </label>
                                     <input type="text" name='password' placeholder="password" className="input input-bordered" required />
                                     <label className="label">
-                                        <p>Don't have an Account? <Link>SignUp</Link> </p>
+                                        <p>Don't have an Account? <Link to="/signup" className='underline'>SignUp</Link> </p>
                                     </label>
                                 </div>
                                 <div className="form-control mt-6">
@@ -47,6 +82,8 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <Toaster />
+
 
         </div>
     );
