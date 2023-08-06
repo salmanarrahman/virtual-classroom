@@ -42,28 +42,53 @@ const Navbar = () => {
                                 />
                             </svg>
                         </label>
-                        <ul
-                            tabIndex={0}
-                            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-                        >
-                            <li>
 
-                                <Link to="/create-course">Create Course</Link>
-                            </li>
-                            <li>
-                                <Link to="/material">Materials and Contents</Link>
-                            </li>
-                            <li>
-                                <Link to="/create-exam">Exams</Link>
-                            </li>
-                            <li>
-                                <Link to="/create-assignment">Assignments</Link>
-                            </li>
+                        {
 
-                            <li>
-                                <Link to="/grade">Grades</Link>
-                            </li>
-                        </ul>
+                            user.email === "admin@vc.com" ?
+                                <>
+
+                                    <ul tabIndex={0}
+                                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                                        <li>
+
+                                            <Link to="/create-course">Create Course</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/material">Materials and Contents</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/create-exam">Exams</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/create-assignment">Assignments</Link>
+                                        </li>
+
+                                        <li>
+                                            <Link to="/grade">Grades</Link>
+                                        </li>
+                                    </ul>
+
+                                </> :
+                                <>
+
+                                    <ul tabIndex={0}
+                                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                                        <li> <Link to='/add-course'>Add Course</Link> </li>
+                                        <li>
+                                            <Link to='/my-material'>Course Materials</Link >
+
+                                        </li>
+                                        <li><Link to='/my-exam'>Exams</Link></li>
+                                        <li><Link to='/my-assignment'>Assignments</Link ></li>
+
+                                        <li><Link to='/my-grade'>Progress Tracking</Link ></li>
+                                    </ul>
+
+                                </>
+
+                        }
+
                     </div>
                     <button className="btn btn-ghost normal-case text-xl">
                         <Link to="/">Virtual Classroom</Link>
