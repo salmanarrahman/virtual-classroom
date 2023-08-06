@@ -10,7 +10,11 @@ const MyGrade = () => {
         return <p>Loading</p>
     }
 
-    const json = data.message[0]
+    const json = data?.message[0]
+
+    if (json === undefined) {
+        return <p className='text-center font-bold text-2xl'>You are not graded yet.Please Have Patience</p>
+    }
 
 
 
