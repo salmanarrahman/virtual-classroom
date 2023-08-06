@@ -11,10 +11,6 @@ const Navbar = () => {
     const { user, isLoading } = useSelector(state => state.user)
     const dispatch = useDispatch();
 
-    if (isLoading) {
-        return <p>Loading</p>
-    }
-
 
     const handleLogout = () => {
         console.log('Logout');
